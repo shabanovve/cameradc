@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        button {
+            position: absolute;
+        }
+
+        button#UP {
+            top: 20%;
+            left: 25%;
+            nav-index: 1;
+            nav-right: #b2;
+            nav-left: #b4;
+            nav-down: #b2;
+            nav-up: #b4;
+        }
+
+        button#RIGHT {
+            top: 40%;
+            left: 50%;
+            nav-index: 2;
+            nav-right: #b3;
+            nav-left: #b1;
+            nav-down: #b3;
+            nav-up: #b1;
+        }
+
+        button#DOWN {
+            top: 70%;
+            left: 25%;
+            nav-index: 3;
+            nav-right: #b4;
+            nav-left: #b2;
+            nav-down: #b4;
+            nav-up: #b2;
+        }
+
+        button#LEFT {
+            top: 40%;
+            left: 0%;
+            nav-index: 4;
+            nav-right: #b1;
+            nav-left: #b3;
+            nav-down: #b1;
+            nav-up: #b3;
+        }
+    </style>
+
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            console.log("document loaded");
+            $("#UP,#DOWN,#LEFT,#RIGHT").on("click", function () {
+                console.log($(this).attr('id'));
+                $.ajax({
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    'type': 'POST',
+                    'url': "/move",
+                    'data': JSON.stringify({direction:$(this).attr('id'),step:50}),
+                    'dataType': 'json'
+                });
+            });
+        });
+
+    </script>
+</head>
+<body>
+
+<button id="UP">UP</button>
+<button id="DOWN">DOWN</button>
+<button id="LEFT">LEFT</button>
+<button id="RIGHT">RIGHT</button>
+
+</body>
+
+</html>
